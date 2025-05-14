@@ -13,11 +13,9 @@ public class Order {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant moment;
     private OrderStatus orderStatus;
-
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
-
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
 
