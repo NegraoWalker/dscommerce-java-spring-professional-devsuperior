@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "orders_itens")
+@Table(name = "orders_itens") //Foi usado como convensão o plural porque order gerou conflito com o comando order by do SQL
 public class OrderItem {
     @EmbeddedId
     private OrderItemPK id = new OrderItemPK();

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users") //Foi usado como convensão o plural porque order gerou conflito com o comando order by do SQL
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

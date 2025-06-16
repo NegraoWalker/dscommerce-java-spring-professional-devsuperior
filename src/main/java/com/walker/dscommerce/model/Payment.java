@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "payments")
+@Table(name = "payments") //Foi usado como convensão o plural porque order gerou conflito com o comando order by do SQL
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

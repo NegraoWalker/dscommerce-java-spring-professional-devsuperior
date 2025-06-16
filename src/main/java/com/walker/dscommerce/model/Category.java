@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "categories") //Foi usado como convensão o plural porque order gerou conflito com o comando order by do SQL
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

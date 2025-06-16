@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "products")
+@Table(name = "products") //Foi usado como convensão o plural porque order gerou conflito com o comando order by do SQL
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +16,7 @@ public class Product {
     @Column(columnDefinition = "TEXT")
     private String description;
     private Double price;
+    @Column(name = "img_url")
     private String imgURL;
 
     @ManyToMany

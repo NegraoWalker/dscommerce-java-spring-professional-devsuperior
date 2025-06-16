@@ -8,13 +8,14 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "orders") //Foi usado como convensão o plural porque order gerou conflito com o comando order by do SQL
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant moment;
+    @Column(name = "order_status")
     private OrderStatus orderStatus;
 
     @ManyToOne
