@@ -3,6 +3,7 @@ package com.walker.dscommerce.model;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.Objects;
 
 @Entity
 @Table(name = "payments") //Foi usado como convensão o plural porque order gerou conflito com o comando order by do SQL
@@ -47,5 +48,16 @@ public class Payment {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Payment payment)) return false;
+        return Objects.equals(getId(), payment.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
     }
 }
