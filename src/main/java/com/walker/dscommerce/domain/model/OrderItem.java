@@ -1,4 +1,4 @@
-package com.walker.dscommerce.model;
+package com.walker.dscommerce.domain.model;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;

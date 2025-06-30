@@ -1,4 +1,4 @@
-package com.walker.dscommerce.model;
+package com.walker.dscommerce.domain.model;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
