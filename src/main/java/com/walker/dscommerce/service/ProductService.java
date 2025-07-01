@@ -8,20 +8,21 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @Service
 public class ProductService {
     private ProductRepository productRepository;
+    private ProductMapper productMapper;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, ProductMapper productMapper) {
         this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
     @Transactional(readOnly = true)
     public ProductDto findById(Long id) {
         Product result = productRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Produto não encontrado com id: " + id));
-        return ProductMapper.toDto(result);
+        return productMapper.toDto(result);
     }
 }
 
