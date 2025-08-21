@@ -3,11 +3,13 @@ package com.walker.dscommerce.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class User {
-    //fields:
+    //Fields:
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,14 +20,18 @@ public class User {
     private LocalDate birthDate;
     private String password;
 
-    //roles
+    //Roles
 
-    //constructors:
+    //Relacionamento 1xN com Order: A classe User é a que manda no relacionamento, isso porque não se pode ter Order sem User.
+    @OneToMany(mappedBy = "client") //Sempre a classe que manda vai ter o mappedBy.
+    private List<Order> orders = new ArrayList<>();
+
+    //Constructors:
     public User() {
     }
 
-    //getters and setters:
+    //Getters and Setters:
 
-    //equals and hashcode:
+    //Equals and Hashcode:
 
 }
