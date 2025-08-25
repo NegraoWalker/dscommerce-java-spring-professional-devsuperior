@@ -2,19 +2,19 @@ package com.walker.dscommerce.model;
 
 import jakarta.persistence.*;
 
-import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "payments")
-public class Payment {
+@Table(name = "categories")
+public class Category {
     //Fields:
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE") //Definindo o Instant como UTC e não com o fuso horário local.
-    private Instant moment;
+    private String name;
 
     /* REGRA PRÁTICA: RELACIONAMENTOS
        Em 1:N → O lado "N" sempre é proprietário
@@ -22,19 +22,17 @@ public class Payment {
        Em N:N → Quem você consulta mais frequentemente
    */
 
-    //Relacionamento 1X1 com Order: Payment depende de Order então Payment é o proprietário do relacionamento
-    @OneToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
+    //Relacionamento NXN com Product: Foi escolhido Product como proprietário: Mais comum: "Mostrar produto X com suas categorias"; E-commerce típico: usuário vê produto → categorias aparecem como tags
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products = new HashSet<>();
 
     //Constructors:
-    public Payment() {
+    public Category() {
     }
 
-    public Payment(Long id, Instant moment, Order order) {
+    public Category(Long id, String name) {
         this.id = id;
-        this.moment = moment;
-        this.order = order;
+        this.name = name;
     }
 
     //Getters and Setters:
@@ -46,20 +44,16 @@ public class Payment {
         this.id = id;
     }
 
-    public Instant getMoment() {
-        return moment;
+    public String getName() {
+        return name;
     }
 
-    public void setMoment(Instant moment) {
-        this.moment = moment;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
+    public Set<Product> getProducts() {
+        return products;
     }
 
     //Equals and HashCode:
@@ -68,8 +62,8 @@ public class Payment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Payment payment = (Payment) o;
-        return Objects.equals(id, payment.id);
+        Category category = (Category) o;
+        return Objects.equals(id, category.id);
     }
 
     @Override
