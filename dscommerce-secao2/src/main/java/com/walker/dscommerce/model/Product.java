@@ -103,7 +103,7 @@ public class Product {
     } //
 
     public List<Order> getOrders() {
-        return orderItems.stream().map(x -> x.getOrder()).toList();
+        return orderItems.stream().map(OrderItem::getOrder).toList();
     } //
 
     //Equals and HashCode:

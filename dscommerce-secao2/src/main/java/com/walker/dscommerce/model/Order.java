@@ -20,6 +20,7 @@ public class Order {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE") //Definindo o Instant como UTC e não com o fuso horário local
     private Instant moment;
 
+    @Column(name = "order_status")
     private OrderStatus orderStatus;
 
      /* REGRA PRÁTICA: RELACIONAMENTOS
