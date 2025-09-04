@@ -2,11 +2,15 @@ package com.walker.dscommerce.controller;
 
 import com.walker.dscommerce.dto.ProductDTO;
 import com.walker.dscommerce.service.ProductService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+
 
 @RestController
 @RequestMapping(value = "/api/products")
@@ -19,17 +23,29 @@ public class ProductController {
         this.productService = productService;
     }
 
-    /**
-     * Endpoint para buscar produto por ID.
-     * Retorna apenas os dados seguros via DTO.
-     */
+
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
         ProductDTO productDTO = productService.findById(id);
         return ResponseEntity.ok(productDTO);
     }
 
+    @GetMapping
+    public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable) {
+        Page<ProductDTO> productDTOPage = productService.findAll(pageable);
+        return ResponseEntity.ok(productDTOPage);
+    }
 
+    @PostMapping
+    public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO productDTO) {
+        ProductDTO createdProductDTO = productService.insert(productDTO);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(createdProductDTO.getId())
+                .toUri();
+        return ResponseEntity.created(uri).body(createdProductDTO);
+    }
 
 
 
