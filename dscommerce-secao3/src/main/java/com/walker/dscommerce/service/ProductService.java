@@ -45,5 +45,20 @@ public class ProductService {
         return modelMapper.map(product, ProductDTO.class);
     }
 
+    @Transactional
+    public ProductDTO update(Long id, ProductDTO productDTO) {
+        Product product = productRepository.getReferenceById(id);
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setPrice(productDTO.getPrice());
+        product.setImgUrl(productDTO.getImgUrl());
+        productRepository.save(product);
+        return modelMapper.map(product, ProductDTO.class);
+    }
 
+    @Transactional
+    public void delete(Long id){
+        productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product não encontrado com ID: " + id));
+        productRepository.deleteById(id);
+    }
 }
