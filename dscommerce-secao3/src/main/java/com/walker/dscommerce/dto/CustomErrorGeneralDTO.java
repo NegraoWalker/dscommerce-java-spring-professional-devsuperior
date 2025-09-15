@@ -2,7 +2,7 @@ package com.walker.dscommerce.dto;
 
 import java.time.Instant;
 
-public class CustomErrorDTO {
+public class CustomErrorGeneralDTO {
 //    Json de resposta, quando ocorre algum erro:
 //    {
 //       "timestamp": "2025-09-09T11:13:45.929+00:00",
@@ -17,10 +17,10 @@ public class CustomErrorDTO {
     private String error;
     private String path;
 
-    public CustomErrorDTO() {
+    public CustomErrorGeneralDTO() {
     }
 
-    public CustomErrorDTO(Instant timestamp, Integer status, String error, String path) {
+    public CustomErrorGeneralDTO(Instant timestamp, Integer status, String error, String path) {
         this.timestamp = timestamp;
         this.status = status;
         this.error = error;

@@ -1,5 +1,9 @@
 package com.walker.dscommerce.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+
 /**
  * DTO para transferência de dados do Product.
  * Contém apenas os campos essenciais que devem ser expostos via API.
@@ -7,8 +11,13 @@ package com.walker.dscommerce.dto;
 public class ProductDTO {
     //Fields:
     private Long id;
+    @Size(min = 3, max = 80, message = "O campo name precisa ter de 3 a 80 caracteres!")
+    @NotBlank(message = "O campo name é obrigatório!")
     private String name;
+    @Size(min = 10, message = "O campo description precisa ter de no mínimo 10 caracteres!")
+    @NotBlank(message = "O campo description é obrigatório!")
     private String description;
+    @Positive(message = "O campo price deve ser positivo!")
     private Double price;
     private String imgUrl;
 
