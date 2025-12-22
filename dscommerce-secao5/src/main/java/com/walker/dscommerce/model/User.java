@@ -1,15 +1,15 @@
 package com.walker.dscommerce.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
     //Fields:
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +27,6 @@ public class User {
 
     private String password;
 
-    //Roles
-
     /* REGRA PRÁTICA: RELACIONAMENTOS
         Em 1:N → O lado "N" sempre é proprietário
         Em 1:1 → Quem depende do outro é proprietário
@@ -38,6 +36,12 @@ public class User {
     //Relacionamento 1xN com Order: Order é o lado N, então Order é o proprietário
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     //Constructors:
     public User() {
@@ -50,6 +54,20 @@ public class User {
         this.phone = phone;
         this.birthDate = birthDate;
         this.password = password;
+    }
+
+    //Métodos personalizados:
+    public void addRole(Role role) {
+        roles.add(role);
+    }
+
+    public boolean hasRole(String roleName) {
+        for (Role role : roles) {
+            if (role.getAuthority().equals(roleName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     //Getters and Setters:
@@ -93,17 +111,52 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
 
     public List<Order> getOrders() {
         return orders;
-    } //
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    //Métodos da interface UserDetails:
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
+    }
 
     //Equals and HashCode:
     @Override

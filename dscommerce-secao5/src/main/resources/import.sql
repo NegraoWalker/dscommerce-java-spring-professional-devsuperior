@@ -55,8 +55,15 @@ INSERT INTO product_category (product_id, category_id) VALUES (23, 3);
 INSERT INTO product_category (product_id, category_id) VALUES (24, 3);
 INSERT INTO product_category (product_id, category_id) VALUES (25, 3);
 
-INSERT INTO users (name, email, phone, password, birth_date) VALUES ('Maria Brown', 'maria@gmail.com', '988888888', '123456', '2001-07-25');
-INSERT INTO users (name, email, phone, password, birth_date) VALUES ('Alex Green', 'alex@gmail.com', '977777777', '123456', '1987-12-13');
+INSERT INTO users (name, email, phone, password, birth_date) VALUES ('Maria Brown', 'maria@gmail.com', '988888888', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG', '2001-07-25');
+INSERT INTO users (name, email, phone, password, birth_date) VALUES ('Alex Green', 'alex@gmail.com', '977777777', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG', '1987-12-13');
+
+INSERT INTO roles (authority) VALUES ('ROLE_CLIENT');
+INSERT INTO roles (authority) VALUES ('ROLE_ADMIN');
+
+INSERT INTO user_role (user_id, role_id) VALUES (1, 1);
+INSERT INTO user_role (user_id, role_id) VALUES (2, 1);
+INSERT INTO user_role (user_id, role_id) VALUES (2, 2);
 
 INSERT INTO orders (moment, order_status, client_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 1, 1);
 INSERT INTO orders (moment, order_status, client_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-07-29T15:50:00Z', 3, 2);
@@ -69,3 +76,5 @@ INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (3, 1, 1,
 
 INSERT INTO payments (order_id, moment) VALUES (1, TIMESTAMP WITH TIME ZONE '2022-07-25T15:00:00Z');
 INSERT INTO payments (order_id, moment) VALUES (2, TIMESTAMP WITH TIME ZONE '2022-07-30T11:00:00Z');
+
+
