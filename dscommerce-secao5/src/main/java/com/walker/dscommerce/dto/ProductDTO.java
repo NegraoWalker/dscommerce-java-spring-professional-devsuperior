@@ -1,8 +1,14 @@
 package com.walker.dscommerce.dto;
 
+import com.walker.dscommerce.model.Category;
+import com.walker.dscommerce.model.Product;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * DTO para transferência de dados do Product.
@@ -21,6 +27,9 @@ public class ProductDTO {
     private Double price;
     private String imgUrl;
 
+    @NotEmpty(message = "O campo categories deve ter pelo menos uma categoria!")
+    private List<CategoryDTO> categories = new ArrayList<>();
+
     //Constructors:
     public ProductDTO() {
     }
@@ -32,6 +41,27 @@ public class ProductDTO {
         this.price = price;
         this.imgUrl = imgUrl;
     }
+
+    public ProductDTO(Long id, String name, String description, Double price, String imgUrl, List<CategoryDTO> categories) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.imgUrl = imgUrl;
+        this.categories = categories;
+    }
+
+    public ProductDTO(Product product) {
+        id = product.getId();
+        name = product.getName();
+        description = product.getDescription();
+        price = product.getPrice();
+        imgUrl = product.getImgUrl();
+        for (Category category : product.getCategories()) {
+            categories.add(new CategoryDTO(category));
+        }
+    }
+
 
     //Getters and Setters:
     public Long getId() {
@@ -72,5 +102,13 @@ public class ProductDTO {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public List<CategoryDTO> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<CategoryDTO> categories) {
+        this.categories = categories;
     }
 }

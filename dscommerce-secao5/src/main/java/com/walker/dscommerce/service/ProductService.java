@@ -1,9 +1,11 @@
 package com.walker.dscommerce.service;
 
+import com.walker.dscommerce.dto.CategoryDTO;
 import com.walker.dscommerce.dto.ProductDTO;
 import com.walker.dscommerce.dto.ProductMinDTO;
 import com.walker.dscommerce.exception.DataBaseIntegrityViolationException;
 import com.walker.dscommerce.exception.ResourceNotFoundException;
+import com.walker.dscommerce.model.Category;
 import com.walker.dscommerce.model.Product;
 import com.walker.dscommerce.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -46,21 +48,19 @@ public class ProductService {
 
     @Transactional
     public ProductDTO insert(ProductDTO productDTO) {
-        Product product = modelMapper.map(productDTO, Product.class);
+        Product product = new Product();
+        copyDTOToEntity(productDTO, product);
         product = productRepository.save(product);
-        return modelMapper.map(product, ProductDTO.class);
+        return new ProductDTO(product);
     }
 
     @Transactional
     public ProductDTO update(Long id, ProductDTO productDTO) {
         try {
             Product product = productRepository.getReferenceById(id);
-            product.setName(productDTO.getName());
-            product.setDescription(productDTO.getDescription());
-            product.setPrice(productDTO.getPrice());
-            product.setImgUrl(productDTO.getImgUrl());
-            productRepository.save(product);
-            return modelMapper.map(product, ProductDTO.class);
+            copyDTOToEntity(productDTO, product);
+            product = productRepository.save(product);
+            return new ProductDTO(product);
         } catch (EntityNotFoundException entityNotFoundException) {
             throw new ResourceNotFoundException("Recurso não encontrado!");
         }
@@ -75,6 +75,21 @@ public class ProductService {
             productRepository.deleteById(id);
         } catch (DataIntegrityViolationException dataIntegrityViolationException) {
             throw new DataBaseIntegrityViolationException("Falha de integridade referencial!");
+        }
+    }
+
+
+
+    private void copyDTOToEntity(ProductDTO productDTO, Product product) {
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setPrice(productDTO.getPrice());
+        product.setImgUrl(productDTO.getImgUrl());
+        product.getCategories().clear();
+        for (CategoryDTO categoryDTO : productDTO.getCategories()) {
+            Category category = new Category();
+            category.setId(categoryDTO.getId());
+            product.getCategories().add(category);
         }
     }
 }
