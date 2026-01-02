@@ -1,6 +1,7 @@
 package com.walker.dscommerce.controller;
 
 import com.walker.dscommerce.dto.ProductDTO;
+import com.walker.dscommerce.dto.ProductMinDTO;
 import com.walker.dscommerce.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -31,8 +32,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductDTO>> findAll(@RequestParam(name = "name", defaultValue = "") String name, Pageable pageable) {
-        Page<ProductDTO> productDTOPage = productService.findAll(name, pageable);
+    public ResponseEntity<Page<ProductMinDTO>> findAll(@RequestParam(name = "name", defaultValue = "") String name, Pageable pageable) {
+        Page<ProductMinDTO> productDTOPage = productService.findAll(name, pageable);
         return ResponseEntity.ok(productDTOPage);
     }
 

@@ -1,6 +1,7 @@
 package com.walker.dscommerce.service;
 
 import com.walker.dscommerce.dto.ProductDTO;
+import com.walker.dscommerce.dto.ProductMinDTO;
 import com.walker.dscommerce.exception.DataBaseIntegrityViolationException;
 import com.walker.dscommerce.exception.ResourceNotFoundException;
 import com.walker.dscommerce.model.Product;
@@ -38,9 +39,9 @@ public class ProductService {
 
 
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findAll(String name, Pageable pageable) {
+    public Page<ProductMinDTO> findAll(String name, Pageable pageable) {
         Page<Product> productPage = productRepository.searchByName(name, pageable);
-        return productPage.map(product -> modelMapper.map(product, ProductDTO.class));
+        return productPage.map(product -> modelMapper.map(product, ProductMinDTO.class));
     }
 
     @Transactional
