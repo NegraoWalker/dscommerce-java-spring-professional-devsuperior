@@ -2,8 +2,8 @@ package com.walker.dscommerce.controller.handlers;
 
 import com.walker.dscommerce.dto.CustomErrorGeneralDTO;
 import com.walker.dscommerce.dto.CustomErrorValidationDTO;
-import com.walker.dscommerce.dto.FieldDTO;
 import com.walker.dscommerce.exception.DataBaseIntegrityViolationException;
+import com.walker.dscommerce.exception.ForbiddenException;
 import com.walker.dscommerce.exception.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -61,6 +61,18 @@ public class ControllerExceptionHandler {
 
         // Retornando o objeto correto
         return ResponseEntity.status(httpStatus).body(customErrorValidationDTO);
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<CustomErrorGeneralDTO> forbiddenException(ForbiddenException e, HttpServletRequest httpServletRequest) { // Corrigido aqui
+        HttpStatus httpStatus = HttpStatus.FORBIDDEN;
+        CustomErrorGeneralDTO customErrorGeneralDTO = new CustomErrorGeneralDTO(
+                Instant.now(),
+                httpStatus.value(),
+                e.getMessage(), // Use o objeto correto 'e'
+                httpServletRequest.getRequestURI()
+        );
+        return ResponseEntity.status(httpStatus).body(customErrorGeneralDTO);
     }
 
 }
