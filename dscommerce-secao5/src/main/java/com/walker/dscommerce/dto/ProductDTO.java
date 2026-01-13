@@ -2,10 +2,7 @@ package com.walker.dscommerce.dto;
 
 import com.walker.dscommerce.model.Category;
 import com.walker.dscommerce.model.Product;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +20,7 @@ public class ProductDTO {
     @Size(min = 10, message = "O campo description precisa ter de no mínimo 10 caracteres!")
     @NotBlank(message = "O campo description é obrigatório!")
     private String description;
+    @NotNull(message = "Campo price é obrigatório!")
     @Positive(message = "O campo price deve ser positivo!")
     private Double price;
     private String imgUrl;
