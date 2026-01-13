@@ -1,13 +1,15 @@
 package com.walker.dscommerce.controller;
 
 import com.walker.dscommerce.dto.OrderDTO;
+import com.walker.dscommerce.dto.ProductDTO;
 import com.walker.dscommerce.service.OrderService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/api/orders")
@@ -24,4 +26,18 @@ public class OrderController {
         OrderDTO orderDTO = orderService.findById(id);
         return ResponseEntity.ok(orderDTO);
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_CLIENT','ROLE_ADMIN')")
+    @PostMapping
+    public ResponseEntity<OrderDTO> insert(@Valid @RequestBody OrderDTO orderDTO) {
+        OrderDTO createdOrderDTO = orderService.insert(orderDTO);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(createdOrderDTO.getId())
+                .toUri();
+        return ResponseEntity.created(uri).body(createdOrderDTO);
+    }
+
+
 }

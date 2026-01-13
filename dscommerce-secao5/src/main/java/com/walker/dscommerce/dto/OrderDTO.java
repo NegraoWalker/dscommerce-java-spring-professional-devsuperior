@@ -3,6 +3,7 @@ package com.walker.dscommerce.dto;
 import com.walker.dscommerce.enums.OrderStatus;
 import com.walker.dscommerce.model.Order;
 import com.walker.dscommerce.model.OrderItem;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ public class OrderDTO {
 
     private ClientDTO client;
     private PaymentDTO payment;
+
+    @NotEmpty(message = "Deve ter pelo menos um item")
     private List<OrderItemDTO> items = new ArrayList<>();
 
 
