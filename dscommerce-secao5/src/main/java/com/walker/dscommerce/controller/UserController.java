@@ -1,6 +1,6 @@
 package com.walker.dscommerce.controller;
 
-import com.walker.dscommerce.dto.UserDTO;
+import com.walker.dscommerce.model.dto.UserDTO;
 import com.walker.dscommerce.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -1,4 +1,4 @@
-package com.walker.dscommerce.dto;
+package com.walker.dscommerce.model.dto;
 
 import com.walker.dscommerce.model.Category;
 

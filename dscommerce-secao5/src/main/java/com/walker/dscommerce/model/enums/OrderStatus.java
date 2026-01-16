@@ -1,4 +1,4 @@
-package com.walker.dscommerce.enums;
+package com.walker.dscommerce.model.enums;
 
 public enum OrderStatus {
     WAITING_PAYMENT(0),

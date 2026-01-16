@@ -1,7 +1,7 @@
 package com.walker.dscommerce.controller.handlers;
 
-import com.walker.dscommerce.dto.CustomErrorGeneralDTO;
-import com.walker.dscommerce.dto.CustomErrorValidationDTO;
+import com.walker.dscommerce.model.dto.CustomErrorGeneralDTO;
+import com.walker.dscommerce.model.dto.CustomErrorValidationDTO;
 import com.walker.dscommerce.exception.DataBaseIntegrityViolationException;
 import com.walker.dscommerce.exception.ForbiddenException;
 import com.walker.dscommerce.exception.ResourceNotFoundException;

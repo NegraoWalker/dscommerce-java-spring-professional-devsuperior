@@ -1,7 +1,7 @@
 package com.walker.dscommerce.service;
 
 
-import com.walker.dscommerce.dto.UserDTO;
+import com.walker.dscommerce.model.dto.UserDTO;
 import com.walker.dscommerce.model.Role;
 import com.walker.dscommerce.model.User;
 import com.walker.dscommerce.projections.UserDetailsProjection;

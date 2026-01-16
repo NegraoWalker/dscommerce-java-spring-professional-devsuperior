@@ -1,6 +1,6 @@
 package com.walker.dscommerce.model;
 
-import com.walker.dscommerce.enums.OrderStatus;
+import com.walker.dscommerce.model.enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.time.Instant;

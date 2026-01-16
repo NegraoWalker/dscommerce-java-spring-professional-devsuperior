@@ -1,7 +1,7 @@
 package com.walker.dscommerce.controller;
 
-import com.walker.dscommerce.dto.ProductDTO;
-import com.walker.dscommerce.dto.ProductMinDTO;
+import com.walker.dscommerce.model.dto.ProductDTO;
+import com.walker.dscommerce.model.dto.ProductMinDTO;
 import com.walker.dscommerce.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;

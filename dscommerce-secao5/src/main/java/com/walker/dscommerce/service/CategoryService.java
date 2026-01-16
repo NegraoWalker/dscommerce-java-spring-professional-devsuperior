@@ -1,6 +1,6 @@
 package com.walker.dscommerce.service;
 
-import com.walker.dscommerce.dto.CategoryDTO;
+import com.walker.dscommerce.model.dto.CategoryDTO;
 import com.walker.dscommerce.model.Category;
 import com.walker.dscommerce.repository.CategoryRepository;
 import org.springframework.stereotype.Service;

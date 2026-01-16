@@ -1,4 +1,4 @@
-package com.walker.dscommerce.dto.mapper;
+package com.walker.dscommerce.config.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

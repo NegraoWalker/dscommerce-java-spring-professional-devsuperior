@@ -1,8 +1,8 @@
 package com.walker.dscommerce.service;
 
-import com.walker.dscommerce.dto.OrderDTO;
-import com.walker.dscommerce.dto.OrderItemDTO;
-import com.walker.dscommerce.enums.OrderStatus;
+import com.walker.dscommerce.model.dto.OrderDTO;
+import com.walker.dscommerce.model.dto.OrderItemDTO;
+import com.walker.dscommerce.model.enums.OrderStatus;
 import com.walker.dscommerce.exception.ResourceNotFoundException;
 import com.walker.dscommerce.model.Order;
 import com.walker.dscommerce.model.OrderItem;

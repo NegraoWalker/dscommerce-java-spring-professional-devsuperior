@@ -1,6 +1,6 @@
-package com.walker.dscommerce.dto;
+package com.walker.dscommerce.model.dto;
 
-import com.walker.dscommerce.enums.OrderStatus;
+import com.walker.dscommerce.model.enums.OrderStatus;
 import com.walker.dscommerce.model.Order;
 import com.walker.dscommerce.model.OrderItem;
 import jakarta.validation.constraints.NotEmpty;

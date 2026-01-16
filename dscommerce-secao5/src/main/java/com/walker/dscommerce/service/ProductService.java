@@ -1,8 +1,8 @@
 package com.walker.dscommerce.service;
 
-import com.walker.dscommerce.dto.CategoryDTO;
-import com.walker.dscommerce.dto.ProductDTO;
-import com.walker.dscommerce.dto.ProductMinDTO;
+import com.walker.dscommerce.model.dto.CategoryDTO;
+import com.walker.dscommerce.model.dto.ProductDTO;
+import com.walker.dscommerce.model.dto.ProductMinDTO;
 import com.walker.dscommerce.exception.DataBaseIntegrityViolationException;
 import com.walker.dscommerce.exception.ResourceNotFoundException;
 import com.walker.dscommerce.model.Category;
