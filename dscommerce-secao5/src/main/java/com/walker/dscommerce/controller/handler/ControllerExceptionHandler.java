@@ -1,4 +1,4 @@
-package com.walker.dscommerce.controller.handlers;
+package com.walker.dscommerce.controller.handler;
 
 import com.walker.dscommerce.model.dto.CustomErrorGeneralDTO;
 import com.walker.dscommerce.model.dto.CustomErrorValidationDTO;
