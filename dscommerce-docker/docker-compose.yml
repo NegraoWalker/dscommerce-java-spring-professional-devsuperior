@@ -1,0 +1,13 @@
+services:
+
+  dscommerce:
+    build: .
+    container_name: dscommerce_app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      CLIENT_ID:      myclientid
+      CLIENT_SECRET:  myclientsecret
+      JWT_DURATION:   86400
+      CORS_ORIGINS:   http://localhost:3000,http://localhost:5173
